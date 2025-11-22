@@ -112,4 +112,26 @@ public class PedidoService implements IPedido {
         return new ApiResponse<>(true, "Pedido obtenido con éxito.", pedido);
     }
 
+    @Override
+    @Transactional
+    public ApiResponse<Void> deletePedido(Integer id) {
+        Pedido pedido = em.find(Pedido.class, id);
+        if (pedido == null) {
+            return new ApiResponse<>(false, "Pedido no encontrado.", null);
+        }
+        em.remove(pedido);
+        if(pedido.getImg1() != null)
+            storageService.delete(pedido.getImg1());
+        if(pedido.getImg2() != null)
+            storageService.delete(pedido.getImg2());
+        if(pedido.getAudio() != null)
+            storageService.delete(pedido.getAudio());
+
+        this.dispService.delete(pedido.getDispositivo().getId());
+        this.clienteService.delete(pedido.getCliente().getId());
+        
+        em.flush();
+        return new ApiResponse<>(true, "Pedido eliminado con éxito.", null);
+    }
+
 }

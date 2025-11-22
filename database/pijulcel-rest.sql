@@ -25,28 +25,20 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `nombre` varchar(100) NOT NULL,
   `telefono` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla pijulcel_app.clientes: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla pijulcel_app.clientes: ~0 rows (aproximadamente)
 DELETE FROM `clientes`;
-INSERT INTO `clientes` (`id`, `nombre`, `telefono`) VALUES
-	(15, 'sdfsdf', '34545'),
-	(16, 'dfgdfgg', '34534545'),
-	(18, 'Samuel Burelos Jeronimo', '9361165168');
 
 -- Volcando estructura para tabla pijulcel_app.dispositivos
 CREATE TABLE IF NOT EXISTS `dispositivos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla pijulcel_app.dispositivos: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla pijulcel_app.dispositivos: ~0 rows (aproximadamente)
 DELETE FROM `dispositivos`;
-INSERT INTO `dispositivos` (`id`, `nombre`) VALUES
-	(15, 'dfgdfg'),
-	(16, 'fdghfghghf'),
-	(18, 'Motorola G9');
 
 -- Volcando estructura para tabla pijulcel_app.pedidos
 CREATE TABLE IF NOT EXISTS `pedidos` (
@@ -67,12 +59,8 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   CONSTRAINT `FK_pedidos_dispositivos` FOREIGN KEY (`disp_id`) REFERENCES `dispositivos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla pijulcel_app.pedidos: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla pijulcel_app.pedidos: ~0 rows (aproximadamente)
 DELETE FROM `pedidos`;
-INSERT INTO `pedidos` (`bar_code`, `cliente_id`, `disp_id`, `descrip`, `audio`, `img_1`, `img_2`, `estatus`, `created`, `updated`) VALUES
-	(1763789080, 15, 15, 'dfgdfgfg', 'audios/06951b08-50a6-4383-b5bc-3f27bcf97ce6.webm', 'pedidos/2c70d8e2-49a7-4937-bf9b-f2f68820eec2.jpg', NULL, 'En proceso', '2025-11-22 05:26:28', '2025-11-22 06:40:35'),
-	(1763789188, 16, 16, NULL, 'audios/a0ae8b09-7ef3-40d1-8a62-ddb8af7452b4.webm', 'pedidos/8e633535-2720-4211-afc5-ff2cc13f6d12.jpg', 'pedidos/a64b1faa-8f71-4236-a404-b730c197ade9.jpg', 'Listo', '2025-11-22 05:27:44', '2025-11-22 06:42:46'),
-	(1763792059, 18, 18, 'hdfghdfghdghdf', 'audios/ab2ff231-1a14-4cca-af1d-cf0cb591b243.jpg', 'pedidos/431209d4-dacf-49ef-bf68-8b33358f7775.jpg', 'pedidos/472d5803-7410-4221-9d9c-5ad0fc132cba.jpg', 'Listo', '2025-11-22 06:17:11', '2025-11-22 06:39:00');
 
 -- Volcando estructura para tabla pijulcel_app.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (

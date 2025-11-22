@@ -23,4 +23,13 @@ public class ClienteService implements ICliente {
         return new ApiResponse<>(true, "Cliente registrado con exito.", cliente);
     }
 
+    @Override
+    public ApiResponse<Void> delete(Integer id) {
+        if(!clienteRep.existsById(id)){
+            return new ApiResponse<>(false, "El cliente no existe.", null);
+        }
+        clienteRep.deleteById(id);
+        return new ApiResponse<>(true, "Cliente eliminado con exito.", null);
+    }
+
 }

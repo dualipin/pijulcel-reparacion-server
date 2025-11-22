@@ -22,5 +22,14 @@ public class DispositivoService implements IDispositivo {
         }
         return new ApiResponse<>(true, "Dispositivo registrado con exito.", dispositivo);
     }
+
+    @Override
+    public ApiResponse<Void> delete(Integer id) {
+        if(!dispRep.existsById(id)){
+            return new ApiResponse<>(false, "El dispositivo no existe.", null);
+        }
+        dispRep.deleteById(id);
+        return new ApiResponse<>(true, "Dispositivo eliminado con exito.", null);
+    }
     
 }

@@ -17,4 +17,6 @@ public interface IPedido {
     ApiResponse<Void> updateEstatusPedido(Integer id, String estatus);
 
     ApiResponse<Pedido> getPedidoById(Integer id);
+
+    ApiResponse<Void> deletePedido(Integer id);
 }

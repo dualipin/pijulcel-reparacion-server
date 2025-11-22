@@ -7,4 +7,6 @@ public interface ICliente {
     
     ApiResponse<Cliente> register(Cliente cliente);
 
+    ApiResponse<Void> delete(Integer id);
+
 }

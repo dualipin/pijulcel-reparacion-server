@@ -7,4 +7,6 @@ public interface IDispositivo {
 
     ApiResponse<Dispositivo> register(Dispositivo dispositivo);
 
+    ApiResponse<Void> delete(Integer id);
+
 }
