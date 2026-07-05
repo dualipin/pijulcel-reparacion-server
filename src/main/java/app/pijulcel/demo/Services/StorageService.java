@@ -128,10 +128,18 @@ public class StorageService implements IStorage {
     }
 
     private Path buildDestinationPath(String filename, String prefix) {
-        return rootLocation
+        Path destination = rootLocation
                 .resolve(prefix + Paths.get(filename))
                 .normalize()
                 .toAbsolutePath();
+
+        try {
+            Files.createDirectories(destination.getParent());
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo crear el directorio para el archivo", e);
+        }
+
+        return destination;
     }
 
     private void compressAndSaveImage(MultipartFile file, Path destinationFile) throws IOException {
