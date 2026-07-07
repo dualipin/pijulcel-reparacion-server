@@ -32,9 +32,10 @@ public class PedidoController {
     public ResponseEntity<ApiResponse<Pedido>> crearPedido(
             @Valid @RequestPart("pedido") PedidoPostDTO pedido,
             @RequestPart(value = "imagenes", required = false) List<MultipartFile> imagenes,
-            @RequestPart(value = "audio", required = false) MultipartFile audio) {
+            @RequestPart(value = "audio", required = false) MultipartFile audio,
+            @RequestPart(value = "video", required = false) MultipartFile video) {
 
-        return ResponseEntity.status(200).body(pedidoService.registerPedido(pedido, imagenes, audio));
+        return ResponseEntity.status(200).body(pedidoService.registerPedido(pedido, imagenes, audio, video));
     }
 
     @GetMapping

@@ -102,6 +102,20 @@ public class StorageService implements IStorage {
         }
     }
 
+    public String saveVideo(MultipartFile file, String filename) {
+        try {
+            validateFile(file);
+            Path destinationFile = buildDestinationPath(filename, "videos/");
+
+            saveFileDirectly(file, destinationFile);
+
+            return filename;
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to store file", e);
+        }
+    }
+
     /*
      * ============================
      * Métodos privados de apoyo

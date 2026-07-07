@@ -1,4 +1,4 @@
-package app.pijulcel.demo.Services;
+ package app.pijulcel.demo.Services;
 
 import java.util.List;
 
@@ -36,7 +36,8 @@ public class PedidoService implements IPedido {
     public ApiResponse<Pedido> registerPedido(
             PedidoPostDTO pedido,
             List<MultipartFile> imagenes,
-            MultipartFile audio) {
+            MultipartFile audio,
+            MultipartFile video) {
 
         // Registrar al cliente
         ApiResponse<Cliente> cliRes = clienteService.register(pedido.getCliente());
@@ -83,6 +84,13 @@ public class PedidoService implements IPedido {
             storageService.saveAudio(audio, audioFileName);
         }
 
+        // GUARDAR VIDEO — SOLO SI LLEGA
+        if (video != null && !video.isEmpty()) {
+            String videoFileName = storageService.generateFileName();
+            pedidoEntity.setVideo("videos/"+videoFileName);
+            storageService.saveVideo(video, videoFileName);
+        }
+
         return new ApiResponse<>(true, "Pedido registrado con éxito.", pedidoEntity);
     }
 
@@ -126,6 +134,8 @@ public class PedidoService implements IPedido {
             storageService.delete(pedido.getImg2());
         if(pedido.getAudio() != null)
             storageService.delete(pedido.getAudio());
+        if(pedido.getVideo() != null)
+            storageService.delete(pedido.getVideo());
 
         this.dispService.delete(pedido.getDispositivo().getId());
         this.clienteService.delete(pedido.getCliente().getId());

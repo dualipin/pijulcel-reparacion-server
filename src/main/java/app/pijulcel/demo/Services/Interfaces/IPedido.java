@@ -10,7 +10,7 @@ import app.pijulcel.demo.Models.Pedido;
 
 public interface IPedido {
 
-    ApiResponse<Pedido> registerPedido(PedidoPostDTO pedido, List<MultipartFile> imagenes, MultipartFile audio);
+    ApiResponse<Pedido> registerPedido(PedidoPostDTO pedido, List<MultipartFile> imagenes, MultipartFile audio, MultipartFile video);
 
     ApiResponse<List<Pedido>> getPedidos();
 

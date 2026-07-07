@@ -44,6 +44,9 @@ public class Pedido implements Serializable {
     @Column(name = "audio", nullable = true, length = 255)
     private String audio;
 
+    @Column(name = "video", nullable = true, length = 255)
+    private String video;
+
     @Column(name = "img_1", nullable = true, length = 255)
     private String img1;
 
