@@ -79,14 +79,14 @@ public class PedidoService implements IPedido {
 
         // GUARDAR AUDIO — SOLO SI LLEGA
         if (audio != null && !audio.isEmpty()) {
-            String audioFileName = storageService.generateFileName();
+            String audioFileName = storageService.generateFileAudio();
             pedidoEntity.setAudio("audios/"+audioFileName);
             storageService.saveAudio(audio, audioFileName);
         }
 
         // GUARDAR VIDEO — SOLO SI LLEGA
         if (video != null && !video.isEmpty()) {
-            String videoFileName = storageService.generateFileName();
+            String videoFileName = storageService.generateFileVideo();
             pedidoEntity.setVideo("videos/"+videoFileName);
             storageService.saveVideo(video, videoFileName);
         }

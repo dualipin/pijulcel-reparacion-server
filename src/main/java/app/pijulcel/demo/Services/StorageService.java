@@ -141,6 +141,10 @@ public class StorageService implements IStorage {
         return UUID.randomUUID().toString() + ".webm";
     }
 
+    public String generateFileVideo() {
+        return UUID.randomUUID().toString() + ".mp4";
+    }
+
     private Path buildDestinationPath(String filename, String prefix) {
         Path destination = rootLocation
                 .resolve(prefix + Paths.get(filename))
