@@ -43,4 +43,15 @@ public class StorageController {
                 .body(file);
     }
 
+    @GetMapping("/videos/{filename}")
+    public ResponseEntity<Resource> getFileVideo(@PathVariable String filename) throws IOException {
+        Resource file = storageService.loadAsResource(filename, "videos/");
+        String contentType = Files.probeContentType(file.getFile().toPath());
+
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_TYPE, contentType)
+                .body(file);
+    }
+
 }
