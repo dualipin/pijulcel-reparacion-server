@@ -44,8 +44,8 @@ public class Pedido implements Serializable {
     @Column(name = "audio", nullable = true, length = 255)
     private String audio;
 
-    @Column(name = "video", nullable = true, length = 255)
-    private String video;
+    // @Column(name = "video", nullable = true, length = 255)
+    // private String video;
 
     @Column(name = "img_1", nullable = true, length = 255)
     private String img1;
@@ -53,8 +53,17 @@ public class Pedido implements Serializable {
     @Column(name = "img_2", nullable = true, length = 255)
     private String img2;
 
+    @Column(name = "img_3", nullable = true, length = 255)
+    private String img3;
+
+    @Column(name = "img_4", nullable = true, length = 255)
+    private String img4;
+
     @Column(name = "estatus", nullable = false)
     private String estatus = "Pendiente";
+
+    @Column(name = "delivery_at", nullable = false)
+    private LocalDateTime deliveryAt;
 
     @Column(name = "created", nullable = false)
     private LocalDateTime created = LocalDateTime.now();

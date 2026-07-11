@@ -60,6 +60,8 @@ public class PedidoService implements IPedido {
         if(pedido.getDescrip() != null)
             pedidoEntity.setDescrip(pedido.getDescrip());
 
+        pedidoEntity.setDeliveryAt(pedido.getDeliveryAt());
+
         // GUARDAR IMÁGENES — SOLO SI LLEGAN
         if (imagenes.get(0) != null && !imagenes.get(0).isEmpty()) {
             String img1FileName = storageService.generateFileName();
@@ -71,6 +73,20 @@ public class PedidoService implements IPedido {
                 String img2FileName = storageService.generateFileName();
                 pedidoEntity.setImg2("pedidos/"+img2FileName);
                 storageService.store(imagenes.get(1), "pedidos/", img2FileName);
+            }
+        }
+        if (imagenes.size() > 2) {
+            if (imagenes.get(2) != null && !imagenes.get(2).isEmpty()) {
+                String img3FileName = storageService.generateFileName();
+                pedidoEntity.setImg3("pedidos/"+img3FileName);
+                storageService.store(imagenes.get(2), "pedidos/", img3FileName);
+            }
+        }
+        if (imagenes.size() > 3) {
+            if (imagenes.get(3) != null && !imagenes.get(3).isEmpty()) {
+                String img4FileName = storageService.generateFileName();
+                pedidoEntity.setImg4("pedidos/"+img4FileName);
+                storageService.store(imagenes.get(3), "pedidos/", img4FileName);
             }
         }
 
@@ -85,11 +101,11 @@ public class PedidoService implements IPedido {
         }
 
         // GUARDAR VIDEO — SOLO SI LLEGA
-        if (video != null && !video.isEmpty()) {
-            String videoFileName = storageService.generateFileVideo();
-            pedidoEntity.setVideo("videos/"+videoFileName);
-            storageService.saveVideo(video, videoFileName);
-        }
+        // if (video != null && !video.isEmpty()) {
+        //     String videoFileName = storageService.generateFileVideo();
+        //     pedidoEntity.setVideo("videos/"+videoFileName);
+        //     storageService.saveVideo(video, videoFileName);
+        // }
 
         return new ApiResponse<>(true, "Pedido registrado con éxito.", pedidoEntity);
     }
@@ -132,10 +148,14 @@ public class PedidoService implements IPedido {
             storageService.delete(pedido.getImg1());
         if(pedido.getImg2() != null)
             storageService.delete(pedido.getImg2());
+        if(pedido.getImg3() != null)
+            storageService.delete(pedido.getImg3());
+        if(pedido.getImg4() != null)
+            storageService.delete(pedido.getImg4());
         if(pedido.getAudio() != null)
             storageService.delete(pedido.getAudio());
-        if(pedido.getVideo() != null)
-            storageService.delete(pedido.getVideo());
+        // if(pedido.getVideo() != null)
+        //     storageService.delete(pedido.getVideo());
 
         this.dispService.delete(pedido.getDispositivo().getId());
         this.clienteService.delete(pedido.getCliente().getId());
