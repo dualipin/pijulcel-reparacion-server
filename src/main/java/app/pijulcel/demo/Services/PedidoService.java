@@ -63,27 +63,23 @@ public class PedidoService implements IPedido {
         pedidoEntity.setDeliveryAt(pedido.getDeliveryAt());
 
         // GUARDAR IMÁGENES — SOLO SI LLEGAN
-        if (imagenes.get(0) != null && !imagenes.get(0).isEmpty()) {
-            String img1FileName = storageService.generateFileName();
-            pedidoEntity.setImg1("pedidos/"+img1FileName);
-            storageService.store(imagenes.get(0), "pedidos/", img1FileName);
-        }
-        if (imagenes.size() > 1) {
-            if (imagenes.get(1) != null && !imagenes.get(1).isEmpty()) {
+        if (imagenes != null) {
+            if (imagenes.size() > 0 && imagenes.get(0) != null && !imagenes.get(0).isEmpty()) {
+                String img1FileName = storageService.generateFileName();
+                pedidoEntity.setImg1("pedidos/"+img1FileName);
+                storageService.store(imagenes.get(0), "pedidos/", img1FileName);
+            }
+            if (imagenes.size() > 1 && imagenes.get(1) != null && !imagenes.get(1).isEmpty()) {
                 String img2FileName = storageService.generateFileName();
                 pedidoEntity.setImg2("pedidos/"+img2FileName);
                 storageService.store(imagenes.get(1), "pedidos/", img2FileName);
             }
-        }
-        if (imagenes.size() > 2) {
-            if (imagenes.get(2) != null && !imagenes.get(2).isEmpty()) {
+            if (imagenes.size() > 2 && imagenes.get(2) != null && !imagenes.get(2).isEmpty()) {
                 String img3FileName = storageService.generateFileName();
                 pedidoEntity.setImg3("pedidos/"+img3FileName);
                 storageService.store(imagenes.get(2), "pedidos/", img3FileName);
             }
-        }
-        if (imagenes.size() > 3) {
-            if (imagenes.get(3) != null && !imagenes.get(3).isEmpty()) {
+            if (imagenes.size() > 3 && imagenes.get(3) != null && !imagenes.get(3).isEmpty()) {
                 String img4FileName = storageService.generateFileName();
                 pedidoEntity.setImg4("pedidos/"+img4FileName);
                 storageService.store(imagenes.get(3), "pedidos/", img4FileName);
