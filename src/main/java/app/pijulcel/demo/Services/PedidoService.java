@@ -16,7 +16,9 @@ import app.pijulcel.demo.Services.Interfaces.IPedido;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class PedidoService implements IPedido {
 
@@ -39,17 +41,23 @@ public class PedidoService implements IPedido {
             MultipartFile audio,
             MultipartFile video) {
 
+        log.info("Iniciando registro de pedido. barCode={}", pedido.getBarCode());
+
         // Registrar al cliente
         ApiResponse<Cliente> cliRes = clienteService.register(pedido.getCliente());
         if (!cliRes.isSuccess()) {
+            log.warn("Error al registrar cliente del pedido barCode={}: {}", pedido.getBarCode(), cliRes.getMessage());
             return new ApiResponse<>(false, "Error al registrar cliente.", null);
         }
+        log.info("Cliente registrado con éxito. id={}", cliRes.getData().getId());
 
         // Registrar el dispositivo
         ApiResponse<Dispositivo> dispRes = dispService.register(pedido.getDispositivo());
         if (!dispRes.isSuccess()) {
+            log.warn("Error al registrar dispositivo del pedido barCode={}: {}", pedido.getBarCode(), dispRes.getMessage());
             return new ApiResponse<>(false, "Error al registrar dispositivo.", null);
         }
+        log.info("Dispositivo registrado con éxito. id={}", dispRes.getData().getId());
 
         // Crear el pedido
         Pedido pedidoEntity = new Pedido();
@@ -88,12 +96,14 @@ public class PedidoService implements IPedido {
 
         // Guardar el pedido en la base de datos
         em.persist(pedidoEntity);
+        log.info("Pedido persistido en base de datos. barCode={}", pedidoEntity.getBarCode());
 
         // GUARDAR AUDIO — SOLO SI LLEGA
         if (audio != null && !audio.isEmpty()) {
             String audioFileName = storageService.generateFileAudio();
             pedidoEntity.setAudio("audios/"+audioFileName);
             storageService.saveAudio(audio, audioFileName);
+            log.info("Audio guardado para pedido barCode={}: {}", pedidoEntity.getBarCode(), pedidoEntity.getAudio());
         }
 
         // GUARDAR VIDEO — SOLO SI LLEGA

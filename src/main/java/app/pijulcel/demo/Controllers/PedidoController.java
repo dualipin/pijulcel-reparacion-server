@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/api/pedidos")
 public class PedidoController {
@@ -35,7 +38,21 @@ public class PedidoController {
             @RequestPart(value = "audio", required = false) MultipartFile audio,
             @RequestPart(value = "video", required = false) MultipartFile video) {
 
-        return ResponseEntity.status(200).body(pedidoService.registerPedido(pedido, imagenes, audio, video));
+        log.info("POST /api/pedidos - Solicitud de registro de pedido recibida. barCode={}, imagenes={}, audio={}, video={}",
+                pedido.getBarCode(),
+                imagenes != null ? imagenes.size() : 0,
+                audio != null && !audio.isEmpty(),
+                video != null && !video.isEmpty());
+
+        ApiResponse<Pedido> response = pedidoService.registerPedido(pedido, imagenes, audio, video);
+
+        if (response.isSuccess()) {
+            log.info("Pedido registrado con éxito. barCode={}", response.getData() != null ? response.getData().getBarCode() : null);
+        } else {
+            log.warn("Fallo al registrar pedido: {}", response.getMessage());
+        }
+
+        return ResponseEntity.status(200).body(response);
     }
 
     @GetMapping
