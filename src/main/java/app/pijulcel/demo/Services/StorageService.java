@@ -89,11 +89,7 @@ public class StorageService implements IStorage {
             validateFile(file);
             Path destinationFile = buildDestinationPath(filename, "audios/");
 
-            if (file.getSize() > 100 * 1024) {
-                compressAndSaveImage(file, destinationFile);
-            } else {
-                saveFileDirectly(file, destinationFile);
-            }
+            saveFileDirectly(file, destinationFile);
 
             return filename;
 
