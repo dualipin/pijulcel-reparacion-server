@@ -2,6 +2,7 @@ package app.pijulcel.demo.Models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -66,9 +67,9 @@ public class Pedido implements Serializable {
     private LocalDateTime deliveryAt;
 
     @Column(name = "created", nullable = false)
-    private LocalDateTime created = LocalDateTime.now();
+    private LocalDateTime created = LocalDateTime.now(ZoneId.of("America/Mexico_City"));
 
     @Column(name = "updated", nullable = false)
-    private LocalDateTime updated = LocalDateTime.now();
+    private LocalDateTime updated = LocalDateTime.now(ZoneId.of("America/Mexico_City"));
 
 }

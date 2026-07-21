@@ -2,7 +2,8 @@ package app.pijulcel.demo.Controllers;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import javax.sql.DataSource;
 
@@ -29,7 +30,7 @@ public class HealthController {
     public ResponseEntity<ApiResponse<HealthResponseDTO>> healthcheck() {
         boolean databaseConnected = isDatabaseConnected();
         HealthResponseDTO data = new HealthResponseDTO(
-                OffsetDateTime.now().toString(),
+                ZonedDateTime.now(ZoneId.of("America/Mexico_City")).toString(),
                 databaseConnected);
 
         if (!databaseConnected) {
