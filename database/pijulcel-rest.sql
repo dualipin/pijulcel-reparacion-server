@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   `cliente_id` int NOT NULL,
   `disp_id` int NOT NULL,
   `descrip` varchar(255) DEFAULT NULL,
+  `recibio` varchar(100) DEFAULT NULL,
   `audio` varchar(255) DEFAULT NULL,
   `img_1` varchar(255) DEFAULT NULL,
   `img_2` varchar(255) DEFAULT NULL,

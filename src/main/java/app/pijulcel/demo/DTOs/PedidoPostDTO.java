@@ -19,6 +19,7 @@ public class PedidoPostDTO {
     @NotNull(message = "El dispositivo es obligatorio")
     private Dispositivo dispositivo;
     private String descrip;
+    private String recibio;
 
     @NotNull(message = "La fecha de entrega es obligatoria")
     private LocalDateTime deliveryAt;

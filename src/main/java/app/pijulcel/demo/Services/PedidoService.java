@@ -68,6 +68,9 @@ public class PedidoService implements IPedido {
         if(pedido.getDescrip() != null)
             pedidoEntity.setDescrip(pedido.getDescrip());
 
+        if(pedido.getRecibio() != null)
+            pedidoEntity.setRecibio(pedido.getRecibio());
+
         pedidoEntity.setDeliveryAt(pedido.getDeliveryAt());
 
         // GUARDAR IMÁGENES — SOLO SI LLEGAN

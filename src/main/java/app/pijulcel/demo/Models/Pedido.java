@@ -42,6 +42,9 @@ public class Pedido implements Serializable {
     @Column(name = "descrip", nullable = true, length = 255)
     private String descrip;
 
+    @Column(name = "recibio", nullable = true, length = 100)
+    private String recibio;
+
     @Column(name = "audio", nullable = true, length = 255)
     private String audio;
 
